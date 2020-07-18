@@ -7,7 +7,8 @@ const submitButton = document.querySelector('.submitOrder');
 const formReset = document.getElementsByTagName('form');
 const detailBtn = document.querySelector('.details');
 const inputName = document.getElementById('name');
-const inputAmount = document.querySelector('#');
+const inputAmount = document.querySelector('#quantity');
+const select = document.querySelector('.select-form');
 
 const handleButton = () => {
     outerModal.classList.add('open');
@@ -26,13 +27,10 @@ submitButton.addEventListener('click', (e) => {
             <button class="served">Delete order</button>
         </div>
     `;
-    console.log(myHTML);
 
     const orderList = document.querySelector('.order-list');
     orderList.insertAdjacentHTML('beforeend', myHTML);
-    console.log(orderList);
     outerModal.classList.remove('open');
-    formReset.reset();
 });
 
 const deleteBtn = (event) => {
@@ -47,15 +45,22 @@ document.addEventListener('click', deleteBtn);
 
 const detailButton = event => {
     if (event.target.matches('.details')) {
-       const name = event.name.value;
-       const amount = event.amount.value;
-       const size = event.value.value;
-       const dish = event.value.value;
-       return `
-         <h2>${name}</h2>
+       innerModal.myDetails = `
+         <h2>${inputName.value}</h2>
          <p>Order: </p>
-         <p>${amount} ${size} ${dish}</p>
+         <p>${inputAmount.value} ${inputSize.value} ${select.value}</p>
        `;
+       outerModal.classList.add('open');
+    }
+}
+
+
+
+let inputSize = document.getElementsByName('size');
+let sizeValue;
+for(var i = 0; i < inputSize.length; i++){
+    if(inputSize[i].checked){
+        sizeValue = inputSize[i].value;
     }
 }
 
