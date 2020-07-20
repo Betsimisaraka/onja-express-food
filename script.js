@@ -6,9 +6,8 @@ const outerModal = document.querySelector('.outer-modal');
 const submitButton = document.querySelector('.submitOrder');
 const formReset = document.getElementsByTagName('form');
 const detailBtn = document.querySelector('.details');
-const inputAmount = document.querySelector('#quantity');
-const select = document.querySelector('.select-form');
 
+//Adding the input form to the moadal inner
 const handleButton = () => {
     innerModal.innerHTML = `
     <form>
@@ -58,9 +57,14 @@ const handleButton = () => {
 addButton.addEventListener('click', handleButton);
 
 window.addEventListener('click', (event) => {
+
+    const inputName = document.getElementById('name');
+    const inputAmount = document.querySelector('#quantity');
+    const select = document.querySelector('.select-form');
+    const inputSize = document.getElementsByName('size');
+
     //To make the new order appear in the list of the order.
     if (event.target.matches('button.submitOrder')) {
-        const inputName = document.getElementById('name');
         const myHTML = `
         <div class="order" data-dish="koba" data-size="large" data-amount="1">
             <span class="title">${inputName.value}</span>
@@ -68,18 +72,24 @@ window.addEventListener('click', (event) => {
             <button class="served">Delete order</button>
         </div>
     `;
-    event.target = myHTML;
     const orderList = document.querySelector('.order-list');
     orderList.insertAdjacentHTML('beforeend', myHTML);
     outerModal.classList.remove('open');
     }
     else if (event.target.matches('.details')) {
         innerModal.innerHTML = `
-          <h2>Anita</h2>
+          <h2>${inputName.value}</h2>
           <p>Order: </p>
-          <p>2 small</p>
+          <p>${select.value} ${inputSize.value} ${inputAmount.value}</p>
+          <img src="https://picsum.photos/200?random=2" alt>
         `;
         outerModal.classList.add('open');
+        outerModal.addEventListener('click', (e) => {
+            const outside = !event.target.closest('.inner-modal')
+            if (outside) {
+                outerModal.classList.remove('open');
+            }
+        });
     }
     // To delete the order
     else if (event.target.classList.contains('served')) {
@@ -88,33 +98,4 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// document.addEventListener('click', deleteBtn);
 
-
-const detailButton = event => {
-    
-}
-
-
-
-// let inputSize = document.getElementsByName('size');
-// let sizeValue;
-// for(var i = 0; i < inputSize.length; i++){
-//     if(inputSize[i].checked){
-//         sizeValue = inputSize[i].value;
-//     }
-// }
-
-// detailBtn.addEventListener('click', detailButton);
-
-
-
-// const inputForm = (event) => {
-//     event.preventDefault;
-
-
-
-//     form.reset();
-// }
-
-// window.addEventListener('click', handleModal);
