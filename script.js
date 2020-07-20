@@ -83,11 +83,11 @@ const detailButton = event => {
 
     const details = event.target;
     if (event.target.matches('.details')) {
-        const orderList = details.closest('.order');
-        const name = orderList.querySelector('.title').textContent;
-        const size = orderList.dataset.size;
-        const select = orderList.dataset.dish;
-        const amount = orderList.dataset.amount;
+        const orderDetails = details.closest('.order');
+        const name = orderDetails.querySelector('.title').textContent;
+        const size = orderDetails.dataset.size;
+        const select = orderDetails.dataset.dish;
+        const amount = orderDetails.dataset.amount;
 
         innerModal.innerHTML = `
           <h2>${name}</h2>
