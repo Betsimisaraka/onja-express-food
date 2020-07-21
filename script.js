@@ -116,7 +116,7 @@ const detailButton = event => {
           <h2>${name}</h2>
           <h3>Order: </h3>
           <p>${amount} ${size} ${dish}</p>
-          <img src="https://picsum.photos/200" alt>
+          <img src="./images/${dish}.jpg" alt="">
         `;
         outerModal.classList.add('open');
     }
